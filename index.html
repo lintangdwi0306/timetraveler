@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Traveler — Chronicles of the Lost Era</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="flash-overlay" id="flashOverlay"></div>
+<div class="portal-overlay" id="portalOverlay">
+  <div class="portal-vortex"></div>
+  <div class="portal-icon" id="portalIcon">⏳</div>
+  <div class="portal-label" id="portalLabel">Melintasi Waktu...</div>
+</div>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="page home-page active">
+  <div class="stars-layer" id="homeStars"></div>
+  <div class="home-content">
+    <div class="home-box">
+
+      <div class="brand">
+        <h1>TIME TRAVELER</h1>
+        <p class="tagline">✦ Chronicles of the Lost Era ✦</p>
+        <p class="subtext">Setiap zaman menyimpan sebuah rahasia.</p>
+      </div>
+
+      <nav class="home-menu">
+        <button id="startBtn" class="menu-btn primary">
+          <span class="menu-icon">▶</span>
+          <span class="menu-label">Mulai Petualangan</span>
+          <span class="menu-arrow">›</span>
+        </button>
+        <button id="howBtn" class="menu-btn">
+          <span class="menu-icon">📖</span>
+          <span class="menu-label">Cara Bermain</span>
+          <span class="menu-arrow">›</span>
+        </button>
+      </nav>
+
+      <button id="resetLevelBtn" class="text-link">🔄 Atur ulang tingkat kesulitan</button>
+
+    </div>
+  </div>
+
+  <div class="home-badge">
+    <span class="badge-icon">🎮</span>
+    <p id="levelBadge" class="badge-text"></p>
+  </div>
+</section>
+
+<!-- ================= HOW TO PLAY ================= -->
+<section id="howTo" class="page">
+  <div class="content-box">
+    <h2>📜 CARA BERMAIN</h2>
+    <p>Kamu adalah Rei, seorang anak yang tanpa sengaja menemukan sebuah benda antik di gudang rumahnya — dan benda itu ternyata mesin waktu yang rusak.</p>
+    <p>Untuk kembali ke masa sekarang, kamu harus melewati berbagai zaman, berbicara dengan Kronos si roh penunjuk waktu, dan menyelesaikan misi di setiap zaman.</p>
+    <div class="rules">
+      <p>🧩 Setiap zaman punya tantangan berbeda: cocokkan kartu, susun urutan, tekan cepat, atau ingat pola</p>
+      <p>💬 Ambil keputusan dalam dialog — pilihanmu mewarnai ceritamu</p>
+      <p>📚 Pelajari sedikit sejarah di sela petualangan</p>
+      <p>⭐ Kumpulkan skor</p>
+      <p>⏳ Kumpulkan Time Fragment</p>
+      <p>👻 Ikuti panduan Kronos</p>
+    </div>
+    <button id="backFromHow">← KEMBALI</button>
+  </div>
+</section>
+
+<!-- ================= PROLOG ================= -->
+<section id="prolog" class="page">
+  <div class="prolog-box">
+    <div class="prolog-scene" id="prologScene"></div>
+    <div class="prolog-dots" id="prologDots"></div>
+    <div class="prolog-textbox">
+      <p id="prologText"><span class="cursor"></span></p>
+    </div>
+    <button id="prologNext">LANJUT →</button>
+  </div>
+</section>
+
+<!-- ================= ERA SELECT ================= -->
+<section id="eraSelect" class="page">
+  <h2 class="page-title">PILIH ZAMAN</h2>
+  <p class="subtitle">Pilih zaman untuk memulai perjalananmu.</p>
+  <p class="fragments">⏳ Time Fragment: <span id="fragCount">0</span> / 4</p>
+  <div class="timeline-map" id="timelineMap"></div>
+  <div class="era-container" id="eraContainer"></div>
+  <div class="achievement-panel">
+    <div class="achievement-heading">
+      <h3>🏅 PENCAPAIAN</h3>
+      <span id="achievementCount">0 / 4</span>
+    </div>
+    <div class="achievement-list" id="achievementList"></div>
+  </div>
+  <div class="echo-journal">
+    <div class="achievement-heading">
+      <h3>📖 JURNAL TIME ECHO</h3>
+      <span id="echoCount">0 / 4</span>
+    </div>
+    <div class="echo-list" id="echoList"></div>
+  </div>
+  <button id="backHome">← MENU UTAMA</button>
+</section>
+
+<!-- ================= GAME ================= -->
+<section id="game" class="page">
+  <div class="era-bg" id="eraBg"></div>
+
+  <div class="game-top">
+    <div>⏳ <b>TIME TRAVELER</b></div>
+    <div>⭐ Skor: <b id="score">0</b></div>
+  </div>
+
+  <div class="game-box">
+    <div id="eraIcon" class="big-icon">🏯</div>
+    <h1 id="eraTitle">Zaman Kerajaan</h1>
+
+    <div class="story"><p id="storyText"></p></div>
+
+    <div id="stageLabel" class="stage-label">TANTANGAN</div>
+
+    <div id="fieldBox" style="display:none;">
+      <p class="field-hint">Gunakan tombol ◀️ ▶️ (atau tombol panah/A-D di keyboard) untuk berjalan, ⤴️ LOMPAT untuk melompat. Dekati NPC atau benda lalu ketuk untuk berinteraksi. Masuk ke gerbang untuk lanjut ke tantangan.</p>
+      <div class="field-scene" id="fieldScene">
+        <div class="field-ground"></div>
+
+        <div class="field-object" id="fieldObject">
+          <div class="prompt-bubble">💬</div>
+          <div class="field-emoji" id="fieldObjectIcon">📦</div>
+        </div>
+
+        <div class="field-echo" id="fieldEcho">
+          <div class="prompt-bubble">✨</div>
+          <div class="field-emoji" id="fieldEchoIcon">🌀</div>
+        </div>
+
+        <div class="field-obstacle" id="fieldObstacle">
+          <div class="field-emoji" id="fieldObstacleIcon">🪨</div>
+        </div>
+
+        <div class="field-npc" id="fieldNpc">
+          <div class="prompt-bubble">💬</div>
+          <div class="field-emoji" id="fieldNpcIcon">🧑</div>
+        </div>
+
+        <div class="field-gate" id="fieldGate">
+          <div class="field-emoji" id="fieldGateIcon">🚪</div>
+          <div class="field-gate-label" id="fieldGateLabel">Gerbang</div>
+        </div>
+
+        <div class="field-character" id="fieldCharacter">
+          <div class="field-character-sprite" id="fieldCharacterSprite">🧒</div>
+        </div>
+      </div>
+
+      <div id="fieldToast" class="field-toast" style="display:none;"></div>
+
+      <div class="field-controls">
+        <button class="field-btn" id="btnLeft">◀️</button>
+        <button class="field-btn jump" id="btnJump">⤴️ LOMPAT</button>
+        <button class="field-btn" id="btnRight">▶️</button>
+      </div>
+    </div>
+
+    <div id="challengeBox"></div>
+    <div id="dialogBox" style="display:none;"></div>
+
+    <div id="result"></div>
+    <button id="nextBtn" class="next-btn">LANJUTKAN →</button>
+  </div>
+</section>
+
+<!-- ================= ERA COMPLETE ================= -->
+<section id="eraComplete" class="page">
+  <div class="eraComplete-box content-box">
+    <div class="frag">⏳</div>
+    <h1>TIME FRAGMENT DIPEROLEH!</h1>
+    <p id="eraCompleteText">Kamu berhasil menyelesaikan zaman ini.</p>
+    <p><b>Skor sementara: <span id="runningScore">0</span></b></p>
+    <button id="continueMapBtn">🗺️ LANJUT KE PETA WAKTU</button>
+  </div>
+</section>
+
+<!-- ================= ENDING ================= -->
+<section id="ending" class="page">
+  <div class="content-box ending" id="endingBox">
+    <div class="logo" id="endingLogo">🏆</div>
+    <h1 id="endingTitle">MESIN WAKTU DIPERBAIKI!</h1>
+    <p id="endingIntro">Kronos tersenyum. Keempat Time Fragment telah terkumpul, dan mesin waktu bersinar terang kembali.</p>
+    <h2>SKOR AKHIR</h2>
+    <div id="finalScore">0</div>
+    <p id="endingText"></p>
+    <div class="ending-achievements" id="endingAchievements"></div>
+    <button id="retryEraBtn" class="outline">🗺️ ULANGI ZAMAN</button>
+    <button id="playAgain">🔄 MAIN LAGI</button>
+  </div>
+</section>
+
+<!-- ================= COMPANION ================= -->
+<div class="companion" id="companion" style="display:none;">
+  <div class="avatar" id="companionAvatar">👻</div>
+  <div class="bubble" id="companionBubble"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
